@@ -68,7 +68,7 @@
         void reportMugBroken() {
             // 아무 일도 하지 않는다.
         }
-}
+    }
 // CoffeeMug의 널 객체 구현 클래스
 // NullCoffeMug는 reportMugBroken()을 호출했을 때
 // 정말 아무 일도 하지 않는다는 문제가 존재한다.
