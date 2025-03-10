@@ -12,9 +12,7 @@
 
 ```java
     for(User user :users){
-sumOfAges +=user.
-
-getAge();
+        sumOfAges +=user.getAge();
     }
 ```
 
@@ -35,9 +33,7 @@ getAge();
 
 ```java
     if(attribute ==null){
-        return new
-
-Set();
+        return new Set();
     }
 ```
 
@@ -50,9 +46,7 @@ Set();
 
 ```java
     if(mugs.isEmpty()){
-        return new
-
-CoffeeMug(diamter:0.0, height:0.0);
+        return new CoffeeMug(diamter:0.0, height:0.0);
     }
 // 머그잔이 없는 경우에 
 // 크기가 0인 커피 머그잔 객체를 생성해서 반환한다.
@@ -63,18 +57,19 @@ CoffeeMug(diamter:0.0, height:0.0);
 
 ```java
     class NullCoffeeMugImpl implements CoffeeMug {
-    Double getDiameter() {
-        return 0.0;
-    }
-
-    Double getHeight() {
-        return 0.0;
-    }
-
-    void reportMugBroken() {
-        // 아무 일도 하지 않는다.
-    }
-} // CoffeeMug의 널 객체 구현 클래스
+        Double getDiameter() {
+            return 0.0;
+        }
+    
+        Double getHeight() {
+            return 0.0;
+        }
+    
+        void reportMugBroken() {
+            // 아무 일도 하지 않는다.
+        }
+}
+// CoffeeMug의 널 객체 구현 클래스
 // NullCoffeMug는 reportMugBroken()을 호출했을 때
 // 정말 아무 일도 하지 않는다는 문제가 존재한다.
 ```
@@ -90,8 +85,8 @@ CoffeeMug(diamter:0.0, height:0.0);
 
 ```java
     public void displayErrorMessage(String message) {
-    canvas.drawText(message, Color.RED);
-}
+        canvas.drawText(message, Color.RED);
+    }
 ```
 
 > 사용자에게 출력을 표시하는 부수 효과를 가지고 있지만, 괜찮다.
@@ -101,14 +96,14 @@ CoffeeMug(diamter:0.0, height:0.0);
 
 ```java
     Color getPixel(int x, int y) {
-    canvas.redraw();
-    Pixel pixel = canvas.getPixel(x, y);
-    return new Color(
-            pixel.getRed(),
-            pixel.getGreen(),
-            pixel.getBlue()
-    );
-}
+        canvas.redraw();
+        Pixel pixel = canvas.getPixel(x, y);
+        return new Color(
+                pixel.getRed(),
+                pixel.getGreen(),
+                pixel.getBlue()
+        );
+    }
 ```
 
 - 스레드1: 캔버스 다시 그리기 의도치 않게 호출 중…
@@ -131,21 +126,21 @@ CoffeeMug(diamter:0.0, height:0.0);
 
 ```java
     public void doSomething(String value) {
-    if (value == null)
-        return;
-    // 값이 없으면 아무 작업도 수행하지 않음
-    System.out.println("Message: " + value);
-}
+        if (value == null)
+            return;
+        // 값이 없으면 아무 작업도 수행하지 않음
+        System.out.println("Message: " + value);
+    }
 ```
 
 ```java
     public static void main(String[] args) {
-    Example ex = new Example();
-    ex.doSomething(null);
-    // 아무것도 출력되지 않음
-    ex.doSomething("Hello");
-    // "Message: Hello" 출력
-}
+        Example ex = new Example();
+        ex.doSomething(null);
+        // 아무것도 출력되지 않음
+        ex.doSomething("Hello");
+        // "Message: Hello" 출력
+    }
 ```
 
 > 매개변수가 없더라도 호출할 수 있고, 해당 매개변수가 없으면 아무 작업도 수행하지 않는 함수가 있다면:
@@ -159,16 +154,16 @@ CoffeeMug(diamter:0.0, height:0.0);
 
 ```java
     enum Status {
-    START,
-    END;
-}
-
-Boolean isStatus(Status status) {
-    if (status == Status.START) {
-        return false;
+        START,
+        END;
     }
-    return true;
-}
+
+    Boolean isStatus(Status status) {
+        if (status == Status.START) {
+            return false;
+        }
+        return true;
+    }
 ```
 
 > Status에 새로운 결과인 Ready가 추가된다면? 아래처럼 미리 가정하여 설계하자.
@@ -177,19 +172,19 @@ Boolean isStatus(Status status) {
 
 ```java
     enum Status {
-    START,
-    END;
-}
-
-Boolean isStatus(Status status) {
-    switch (status) {
-        case START:
-            return false;
-        case END:
-            return true;
+        START,
+        END;
     }
-    throw new UncheckedException();
-}
+
+    Boolean isStatus(Status status) {
+        switch (status) {
+            case START:
+                return false;
+            case END:
+                return true;
+        }
+        throw new UncheckedException();
+    }
 ```
 
 > 이렇게 사용할 경우 Status 열거형에 새 값을 추가한 개발자는 isStatus()도 변경해야 함을 알 수 있다.
@@ -201,15 +196,15 @@ Boolean isStatus(Status status) {
 
 ```java
     Boolean isStatus(Status status) {
-    switch (status) {
-        case START:
-            return false;
-        case END:
-            return true;
-        default:
-            return true;
+        switch (status) {
+            case START:
+                return false;
+            case END:
+                return true;
+            default:
+                return true;
+        }
     }
-}
 ```
 
 - 따라서 기본 케이스를 활용하고자 한다면, default 파트에서 예외를 발생시킬 수 있다.
