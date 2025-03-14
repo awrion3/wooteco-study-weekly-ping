@@ -247,42 +247,38 @@
         ```
         
 - **해결책: 더 작은 함수로 분리**
-
-> "2장에서는 하나의 함수가 너무 많은 일을 하면 추상화 계층이 나빠진다는 점을 살펴봤다"에 해당하는 예시에 대해서 각자 생각해보면 좋을 것 같습니다. 🤔
-
-    
-    - 함수가 너무 많은 일을 하면 추상화 계층이 나빠진다.
-    - 그러므로 추상화를 위해 중첩이 없더라도 메서드를 더 작은 메서드로 분리하는 것이 좋다.
-    - 많은 일을 하는 코드에 중첩마저 많을 때 메서드를 분리하는 것이 더욱 더 중요하다.
-    - 더 작은 함수
+  - 함수가 너무 많은 일을 하면 추상화 계층이 나빠진다.
+    > "하나의 함수가 너무 많은 일을 하면 추상화 계층이 나빠진다는 점을 살펴봤다"에 해당하는 예시에 대해서 각자 생각해보면 좋을 것 같습니다. 🤔
+  - 그러므로 추상화를 위해 중첩이 없더라도 메서드를 더 작은 메서드로 분리하는 것이 좋다.
+  - 많은 일을 하는 코드에 중첩마저 많을 때 메서드를 분리하는 것이 더욱 더 중요하다.
+  - 더 작은 함수
         
-        ```java
-        private SentConfirmation sendOwnerALetter(Vehicle vehicle, Letter letter) {
-          Address ownersAddress = getOwnersAddress(vehicle);
-          if (ownersAddresss != null) {
-            return sendLetter(ownersAddress, letter);
-          }
-          return null;
+      ```java
+      private SentConfirmation sendOwnerALetter(Vehicle vehicle, Letter letter) {
+        Address ownersAddress = getOwnersAddress(vehicle);
+        if (ownersAddresss != null) {
+          return sendLetter(ownersAddress, letter);
         }
+        return null;
+      }
         
-        private Address getOwnersAddress(Vehicle vehicle) {
-          if (vehicle.hasBeenScraped()) {
-            ownersAddress = SCRAPYARD_ADDRESS;
-          }
-          Purchase mostRecentPurchase = vehicle.getMostRecentPurchase();
-          if (mostRecentPurchase == null) {
-            return SHOWROOM_ADDRESS;
-          }
-          Buyer buyer = mostRecentPurchase.getBuyers();
-            if (buyers == null) {
-              return null;
-            }
-          return buyer.getAddress();
+      private Address getOwnersAddress(Vehicle vehicle) {
+        if (vehicle.hasBeenScraped()) {
+          ownersAddress = SCRAPYARD_ADDRESS;
         }
-        ```
+        Purchase mostRecentPurchase = vehicle.getMostRecentPurchase();
+        if (mostRecentPurchase == null) {
+          return SHOWROOM_ADDRESS;
+        }
+        Buyer buyer = mostRecentPurchase.getBuyers();
+          if (buyers == null) {
+            return null;
+          }
+        return buyer.getAddress();
+      }
+      ```
         
-    
-> 중첩된 if문 대신 반환문을 사용하고 마지막에 `return null`을 사용하는 방식에 대한 의견이 궁금합니다. 🤔
+    > 중첩된 if문 대신 반환문을 사용하고 마지막에 `return null`을 사용하는 방식에 대한 의견이 궁금합니다. 🤔
 
 
 ---
