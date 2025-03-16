@@ -163,6 +163,40 @@
 > | appliance   | refrigerator     |
 > | appliance   | refrigerator     |
 
+<details>
+  <summary>추가 해설</summary>
+
+> EXISTS란?
+>  - EXISTS는 서브쿼리가 결과를 반환하는지 여부를 확인하는 조건문이다.
+>  EXISTS (서브쿼리)는 서브쿼리가 한 개 이상의 행을 반환하면 TRUE,
+>  그렇지 않으면 FALSE를 반환한다.
+
+> SELECT 1의 의미
+>  - EXISTS는 서브쿼리에서 어떤 값을 SELECT하는지 중요하지 않다.
+>  즉, SELECT 1이든, SELECT *이든, SELECT NULL이든 상관없이
+>  서브쿼리가 결과를 반환하면 TRUE, 반환하지 않으면 FALSE이다.
+
+> 서브쿼리 해석
+>  - EXISTS 안
+>
+>  p2 테이블을 조회하면서 category별로 그룹화 (GROUP BY category).
+>  각 category에서 서로 다른 제품(DISTINCT product)이 2개 이상 있는 경우만 선택 
+>  (HAVING COUNT(DISTINCT product) > 1).
+>  즉, 같은 category에 속한 제품이 2개 이상 존재하는 카테고리만 반환.
+> 
+>  - EXISTS 동작
+>
+>  p1의 각 행(category, product)에 대해 서브쿼리가 결과를 반환하면 TRUE.
+>  즉, 해당 category가 2개 이상의 서로 다른 제품을 가지고 있으면 TRUE.
+>  그러면 p1에서 그 category에 속하는 모든 product를 반환.
+
+>  - 서브쿼리 요약 
+> 
+>  EXISTS는 서브쿼리 결과가 존재하는지만 확인하는 조건문이며, 
+>  이 쿼리는 두 개 이상의 제품이 있는 category만 조회하게 한다.
+
+</details>
+
 - **IN** : 서브쿼리의 결과가 포함되어 있는지 확인하는 연산자
 
 ```sql
