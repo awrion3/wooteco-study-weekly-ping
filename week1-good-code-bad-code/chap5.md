@@ -1,6 +1,6 @@
-## 5장. 가독성 높은 코드를 작성하라
+# 5장. 가독성 높은 코드를 작성하라
 
-### 서술형 명칭 사용
+## 서술형 명칭 사용
 
 - 서술적이지 않은 이름은 코드를 읽기 어렵게 만든다.
 - 주석문이나 문서를 추가함으로써 서술적이지 않은 이름을 개선할 수 없지만, 서술적인 이름을 대체할 수 없다.
@@ -8,7 +8,7 @@
 
 ---
 
-### 주석문의 적절한 사용
+## 주석문의 적절한 사용
 
 - **주석문 및 문서화는 코드가 무엇을 하는지, 왜 그 일을 하는지, 그리고 사용 지침 및 기타 정보를 제공하기 위해 사용된다.**
     - 클래스와 같이 큰 단위의 코드가 무엇을 하는지는 요약하는 높은 수준의 주석문은 유용하나,
@@ -110,7 +110,7 @@
 
 ---
 
-### 코드 줄 수를 고정하지 말라
+## 코드 줄 수를 고정하지 말라
 
 - **일반적으로 코드의 줄 수가 적을수록 좋다.**
     - 그러나 코드 줄 수는 반드시 지켜야 할 엄격한 규칙은 아니다.
@@ -151,7 +151,7 @@
 
 ---
 
-### 일관된 코딩 스타일을 고수하라
+## 일관된 코딩 스타일을 고수하라
 
 - **일관적이지 않은 코딩 스타일은 혼동을 일으킬 수 있다.**
     - 일반적으로 클래스 이름을 파스칼 케이스(PascalCase)로, 변수 이름을 캐멀 케이스(camelCase)로 작성한다.
@@ -167,7 +167,7 @@
 
 ---
 
-### 깊이 중첩된 코드를 피하라
+## 깊이 중첩된 코드를 피하라
 
 - **일반적으로 코드는 서로 중첩되는 블록으로 구성된다.**
     - 함수가 호출되면 그 함수가 실행되는 코드가 하나의 블록이 된다.
@@ -247,47 +247,43 @@
         ```
         
 - **해결책: 더 작은 함수로 분리**
-
-> "2장에서는 하나의 함수가 너무 많은 일을 하면 추상화 계층이 나빠진다는 점을 살펴봤다"에 해당하는 예시에 대해서 각자 생각해보면 좋을 것 같습니다. 🤔
-
-    
-    - 함수가 너무 많은 일을 하면 추상화 계층이 나빠진다.
-    - 그러므로 추상화를 위해 중첩이 없더라도 메서드를 더 작은 메서드로 분리하는 것이 좋다.
-    - 많은 일을 하는 코드에 중첩마저 많을 때 메서드를 분리하는 것이 더욱 더 중요하다.
-    - 더 작은 함수
+  - 함수가 너무 많은 일을 하면 추상화 계층이 나빠진다.
+    > "하나의 함수가 너무 많은 일을 하면 추상화 계층이 나빠진다는 점을 살펴봤다"에 해당하는 예시에 대해서 각자 생각해보면 좋을 것 같습니다. 🤔
+  - 그러므로 추상화를 위해 중첩이 없더라도 메서드를 더 작은 메서드로 분리하는 것이 좋다.
+  - 많은 일을 하는 코드에 중첩마저 많을 때 메서드를 분리하는 것이 더욱 더 중요하다.
+  - 더 작은 함수
         
-        ```java
-        private SentConfirmation sendOwnerALetter(Vehicle vehicle, Letter letter) {
-          Address ownersAddress = getOwnersAddress(vehicle);
-          if (ownersAddresss != null) {
-            return sendLetter(ownersAddress, letter);
-          }
-          return null;
+      ```java
+      private SentConfirmation sendOwnerALetter(Vehicle vehicle, Letter letter) {
+        Address ownersAddress = getOwnersAddress(vehicle);
+        if (ownersAddresss != null) {
+          return sendLetter(ownersAddress, letter);
         }
+        return null;
+      }
         
-        private Address getOwnersAddress(Vehicle vehicle) {
-          if (vehicle.hasBeenScraped()) {
-            ownersAddress = SCRAPYARD_ADDRESS;
-          }
-          Purchase mostRecentPurchase = vehicle.getMostRecentPurchase();
-          if (mostRecentPurchase == null) {
-            return SHOWROOM_ADDRESS;
-          }
-          Buyer buyer = mostRecentPurchase.getBuyers();
-            if (buyers == null) {
-              return null;
-            }
-          return buyer.getAddress();
+      private Address getOwnersAddress(Vehicle vehicle) {
+        if (vehicle.hasBeenScraped()) {
+          ownersAddress = SCRAPYARD_ADDRESS;
         }
-        ```
+        Purchase mostRecentPurchase = vehicle.getMostRecentPurchase();
+        if (mostRecentPurchase == null) {
+          return SHOWROOM_ADDRESS;
+        }
+        Buyer buyer = mostRecentPurchase.getBuyers();
+          if (buyers == null) {
+            return null;
+          }
+        return buyer.getAddress();
+      }
+      ```
         
-    
-> 중첩된 if문 대신 반환문을 사용하고 마지막에 `return null`을 사용하는 방식에 대한 의견이 궁금합니다. 🤔
+    > 중첩된 if문 대신 반환문을 사용하고 마지막에 `return null`을 사용하는 방식에 대한 의견이 궁금합니다. 🤔
 
 
 ---
 
-### 함수 호출도 가독성이 있어야 한다
+## 함수 호출도 가독성이 있어야 한다
 
 - **함수의 이름 뿐만 함수 호출도 가독성이 있어야 한다.**
     - 함수의 인수 개수와 함수가 담당하는 역할도 가독성에 영향을 준다.
@@ -349,7 +345,7 @@
 
 ---
 
-### 설명되지 않은 값을 사용하지 말라
+## 설명되지 않은 값을 사용하지 말라
 
 - 하드 코드로 작성된 모든 값에는 2가지 중요한 정보가 있다.
     - 값이 무엇인지: 컴퓨터가 이해하는 의미
@@ -366,7 +362,7 @@
 
 ---
 
-### 익명 함수를 적절하게 사용하라
+## 익명 함수를 적절하게 사용하라
 
 - 익명 함수(anonymous function)은 이름이 없는 함수이며, 일반적으로 코드 내의 필요한 지점에서 인라인으로 정의된다.
 - 익명 함수는 간단한 경우 코드의 가독성을 높여주지만 복잡하거나 재사용해야 하는 경우 문제가 될 수 있다.
@@ -378,7 +374,7 @@
 
 ---
 
-### 프로그래밍 언어의 새로운 기능을 적절하게 사용하라
+## 프로그래밍 언어의 새로운 기능을 적절하게 사용하라
 
 - 새로운 기능을 사용하고 싶다는 생각이 들 때, 그것이 정말로 그일에 적합한 도구인지 솔직하게 생각해봐야 한다.
 - **새 기능은 코드를 개선할 수 있다.**
