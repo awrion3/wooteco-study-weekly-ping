@@ -242,3 +242,97 @@ DROP VIEW sample1;
 ### 3. 뷰의 약점
 
 뷰는 데이터베이스 객체로서 저장장치에 저장된다. 하지만 테이블과 다르게 큰 저장 공간이 필요하지 않다. 데이터베이스에 저장되는 것을 SELECT 명령이기 때문이다. 그렇기에 저장 공간을 소비하지 않는 대신에 CPU 자원을 사용한다.
+
+## 퀴즈
+
+1. `ALTER TABLE`을 사용하여 `orders` 테이블의 `customer_id` 컬럼에 외래 키 제약 조건을 추가하세요.(외래키 이름은 fk_orders_customers로 지정한다.)
+
+```sql
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE
+);
+```
+
+<details>
+  <summary>정답</summary>
+
+```sql
+ALTER TABLE orders
+    ADD CONSTRAINT fk_orders_customers
+        FOREIGN KEY (customer_id)
+            REFERENCES customers(customer_id)
+```
+
+</details>
+
+2. `name`과 `price` 컬럼을 동시에 활용하는 조회 속도를 높이기 위해 **복합 인덱스**를 생성하세요.
+   인덱스 이름은 `idx_name_price`로 설정해야 합니다.
+
+```sql
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    category VARCHAR(50),
+    price DECIMAL(10,2),
+    stock_quantity INT
+);
+```
+
+<details>
+  <summary>정답</summary>
+
+```sql
+CREATE INDEX idx_name_price
+ON products (name, price);
+```
+
+</details>
+
+
+
+3. delete와 truncate 차이점에 대해 설명하시오
+
+<details>
+  <summary>정답</summary>
+
+DELETE는 데이터를 삭제하더라도 데이터가 담겨있던 Storage는 없어지지 않고 commit 명령어를 사용하기 전이라면 rollback으로 복구가능하다.
+
+하지만 그에 반해 TRUNCATE는 자동 commit이 되기 때문에 지운 데이터를 복구할 수 없다.
+
+</details>
+
+4. `high_salary_employees`라는 뷰를 생성하세요
+- `employees` 테이블에서 급여(`salary`)가 **5,000 이상**인 직원만 포함해야 합니다.
+- 출력할 컬럼: `employee_id`, `name`, `salary`, `department_id`
+
+```sql
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department_id INT,
+    salary DECIMAL(10,2),
+    hire_date DATE,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)
+);
+```
+<details>
+  <summary>정답</summary>
+
+```sql
+CREATE VIEW high_salary_employees AS
+SELECT employee_id, name, salary, department_id
+FROM employees
+WHERE salary >= 5000;
+```
+</details>
+
+
+
+
