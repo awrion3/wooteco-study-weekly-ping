@@ -63,7 +63,7 @@
 - 가장 엄격한 격리 수준 (성능 저하 가능)
 - 읽기/쓰기 작업 중인 레코드는 다른 트랜잭션에서 접근 불가
 
-## 논의 주제
+## 논의
 - MySQL이 기본적으로 REPEATABLE READ를 사용하지만, 많은 기업이 READ COMMITTED를 선택하고 있다고 한다. 그 이유는 무엇일까?
 
 <details>
@@ -78,4 +78,66 @@
 - READ COMMITTED는 트랜잭션 중간에 다른 트랜잭션이 커밋한 데이터를 바로 반영함.
 - REPEATABLE READ는 트랜잭션 시작 시점을 기준으로 데이터를 유지하므로, 트랜잭션 도중 최신 데이터가 반영되지 않음.
 
+</details>
+
+## 퀴즈
+
+1. MySQL에서 제공하는 잠금 방식 중, 스토리지 엔진 내부에서 레코드 기반의 잠금 방식을 탑재하고 있는 것은?
+    1. MyISAM
+    2. MEMORY
+    3. InnoDB
+    4. CSV
+
+<details>
+<summary>정답</summary>
+> 정답: 3
+> (InnoDB 스토리지 엔진은 MySQL에서 제공하는 잠금과는 별개로 스토리지 엔진 내부에서 레코드 기반의 잠금 방식을 탑재하고 있다.)
+</details>
+
+2. MySQL에서 제공하는 잠금 방식 중, 특정 문자열에 대해 잠금 설정을 제공하는 것은?
+    1. 글로벌 락
+    2. 테이블 락
+    3. 네임드 락
+    4. 메타데이터 락
+
+<details>
+<summary>정답</summary>
+> 정답: 3
+> (네임드 락은 MySQL에서 제공하는 잠금 방식 중, 특정 문자열에 대해 잠금 설정을 제공하는 것이다.)
+</details>
+
+3. MySQL에서 제공하는 잠금 방식 중, 테이블/뷰 변경 시 자동 적용되는 것은?
+    1. 글로벌 락
+    2. 테이블 락
+    3. 네임드 락
+    4. 메타데이터 락
+
+<details>
+<summary>정답</summary>
+> 정답: 4
+> (메타데이터 락은 MySQL에서 제공하는 잠금 방식 중, 테이블/뷰 변경 시 자동 적용되는 것이다.)
+</details>
+
+4. MySQL에서 제공하는 트랜잭션 격리 수준 중, DIRTY READ가 발생할 수 있는 것은?
+    1. READ UNCOMMITTED
+    2. READ COMMITTED
+    3. REPEATABLE READ
+    4. SERIALIZABLE
+
+<details>
+<summary>정답</summary>
+> 정답: 1
+> (DIRTY READ는 READ UNCOMMITTED에서 발생할 수 있다.)
+</details>
+
+5. MySQL에서 제공하는 트랜잭션 격리 수준 중, NON-REPEATABLE READ가 발생할 수 있는 것은?
+    1. READ UNCOMMITTED
+    2. READ COMMITTED
+    3. REPEATABLE READ
+    4. SERIALIZABLE
+
+<details>
+<summary>정답</summary>
+> 정답: 2
+> (NON-REPEATABLE READ는 READ COMMITTED에서 발생할 수 있다.)
 </details>
