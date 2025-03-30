@@ -81,6 +81,7 @@
 </details>
 
 ## 퀴즈
+
 1. MySQL에서 제공하는 잠금 방식 중, 스토리지 엔진 내부에서 레코드 기반의 잠금 방식을 탑재하고 있는 것은?
     1. MyISAM
     2. MEMORY
@@ -89,8 +90,9 @@
 
 <details>
 <summary>정답</summary>
+
 > 정답: 3
-> (InnoDB 스토리지 엔진은 MySQL에서 제공하는 잠금과는 별개로 스토리지 엔진 내부에서 레코드 기반의 잠금 방식을 탑재하고 있다.)
+- (InnoDB 스토리지 엔진은 MySQL에서 제공하는 잠금과는 별개로 스토리지 엔진 내부에서 레코드 기반의 잠금 방식을 탑재하고 있다.)
 </details>
 
 2. MySQL에서 제공하는 잠금 방식 중, 특정 문자열에 대해 잠금 설정을 제공하는 것은?
@@ -101,8 +103,9 @@
 
 <details>
 <summary>정답</summary>
+
 > 정답: 3
-> (네임드 락은 MySQL에서 제공하는 잠금 방식 중, 특정 문자열에 대해 잠금 설정을 제공하는 것이다.)
+- (네임드 락은 MySQL에서 제공하는 잠금 방식 중, 특정 문자열에 대해 잠금 설정을 제공하는 것이다.)
 </details>
 
 3. MySQL에서 제공하는 잠금 방식 중, 테이블/뷰 변경 시 자동 적용되는 것은?
@@ -113,8 +116,9 @@
 
 <details>
 <summary>정답</summary>
+
 > 정답: 4
-> (메타데이터 락은 MySQL에서 제공하는 잠금 방식 중, 테이블/뷰 변경 시 자동 적용되는 것이다.)
+- (메타데이터 락은 MySQL에서 제공하는 잠금 방식 중, 테이블/뷰 변경 시 자동 적용되는 것이다.)
 </details>
 
 4. MySQL에서 제공하는 트랜잭션 격리 수준 중, DIRTY READ가 발생할 수 있는 것은?
@@ -125,8 +129,9 @@
 
 <details>
 <summary>정답</summary>
+
 > 정답: 1
-> (DIRTY READ는 READ UNCOMMITTED에서 발생할 수 있다.)
+- (DIRTY READ는 READ UNCOMMITTED에서 발생할 수 있다.)
 </details>
 
 5. MySQL에서 제공하는 트랜잭션 격리 수준 중, NON-REPEATABLE READ가 발생할 수 있는 것은?
@@ -137,6 +142,7 @@
 
 <details>
 <summary>정답</summary>
+
 > 정답: 2
-> (NON-REPEATABLE READ는 READ COMMITTED에서 발생할 수 있다.)
+- (NON-REPEATABLE READ는 READ COMMITTED에서 발생할 수 있다.)
 </details>
